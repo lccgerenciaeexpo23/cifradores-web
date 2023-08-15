@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifrado Cesar Web</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #3e1242;
+        }
+
+        .container {
+            background-color: rgb(46, 45, 49);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 2px 6px rgba(73, 31, 31, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        textarea, input, button {
+            margin: 10px 0;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cifrado Cesar Web</h1>
+        <textarea id="inputText" placeholder="Introduce el texto"></textarea>
+        <input type="number" id="shiftAmount" placeholder="Desplazamiento">
+        <button id="encryptButton">Cifrar</button>
+        <button id="decryptButton">Descifrar</button>
+        <textarea id="outputText" placeholder="Resultado"></textarea>
+    </div>
+    <script>
+        document.getElementById('encryptButton').addEventListener('click', function() {
+            const inputText = document.getElementById('inputText').value;
+            const shiftAmount = parseInt(document.getElementById('shiftAmount').value);
+            const outputText = encryptCesar(inputText, shiftAmount);
+            document.getElementById('outputText').value = outputText;
+        });
+
+        document.getElementById('decryptButton').addEventListener('click', function() {
+            const inputText = document.getElementById('inputText').value;
+            const shiftAmount = parseInt(document.getElementById('shiftAmount').value);
+            const outputText = decryptCesar(inputText, shiftAmount);
+            document.getElementById('outputText').value = outputText;
+        });
+
+        function encryptCesar(text, shift) {
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            text = text.toUpperCase();
+            let encryptedText = '';
+
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                if (char === ' ') {
+                    encryptedText += ' ';
+                    continue;
+                }
+                const index = alphabet.indexOf(char);
+                if (index === -1) {
+                    encryptedText += char;
+                } else {
+                    const newIndex = (index + shift) % 26;
+                    encryptedText += alphabet[newIndex];
+                }
+            }
+
+            return encryptedText;
+        }
+
+        function decryptCesar(text, shift) {
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            text = text.toUpperCase();
+            let decryptedText = '';
+
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                if (char === ' ') {
+                    decryptedText += ' ';
+                    continue;
+                }
+                const index = alphabet.indexOf(char);
+                if (index === -1) {
+                    decryptedText += char;
+                } else {
+                    const newIndex = (index - shift + 26) % 26;
+                    decryptedText += alphabet[newIndex];
+                }
+            }
+
+            return decryptedText;
+        }
+    </script>
+</body>
+</html>

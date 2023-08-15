@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(to bottom right, #184a68, #0285ff);
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .button {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      width: 150px;
+      text-align: center;
+    }
+
+    #button1 {
+      background-color: #0074D9;
+    }
+
+    #button2 {
+      background-color: #2ECC40;
+    }
+
+    #button3 {
+      background-color: #FF4136;
+    }
+  </style>
+  <title>Mi Página con Enlaces</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Cifradores</h1>
+    <div class="button-container">
+      <a class="button" id="button1" href="codigo-binario.html">Cifrador binario</a>
+      <a class="button" id="button2" href="codigo-cesar.html">Cifrador cesar</a>
+      <a class="button" id="button3" href="codigo-morse.html">Cifrador morse</a>
+    </div>
+  </div>
+</body>
+</html>

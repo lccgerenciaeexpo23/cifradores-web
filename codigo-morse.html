@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #807d7d;
+    }
+
+    .container {
+      background-color: rgb(58, 57, 57);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 50px auto;
+      max-width: 500px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    textarea, button {
+      margin: 10px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 80%;
+      box-sizing: border-box;
+    }
+
+    button {
+      cursor: pointer;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      width: 40%;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    p {
+      font-weight: bold;
+      margin-top: 20px;
+      color: rgb(224, 224, 224);
+    }
+
+    #outputText {
+      font-size: 18px;
+      color: rgb(255, 255, 255);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Cifrador y Descifrador en Código Morse</h1>
+    <textarea id="inputText" placeholder="Ingresa el texto"></textarea>
+    <button id="encryptButton">Cifrar</button>
+    <button id="decryptButton">Descifrar</button>
+    <p>Resultado:</p>
+    <p id="outputText"></p>
+  </div>
+
+  <script>
+    const morseCodeMap = {
+      A: ".-", B: "-...", C: "-.-.", D: "-..", E: ".", F: "..-.", G: "--.", H: "....",
+      I: "..", J: ".---", K: "-.-", L: ".-..", M: "--", N: "-.", O: "---", P: ".--.",
+      Q: "--.-", R: ".-.", S: "...", T: "-", U: "..-", V: "...-", W: ".--", X: "-..-",
+      Y: "-.--", Z: "--..",
+      0: "-----", 1: ".----", 2: "..---", 3: "...--", 4: "....-", 5: ".....",
+      6: "-....", 7: "--...", 8: "---..", 9: "----."
+    };
+
+    const reverseMorseCodeMap = {};
+    for (let char in morseCodeMap) {
+      reverseMorseCodeMap[morseCodeMap[char]] = char;
+    }
+
+    const encryptButton = document.getElementById("encryptButton");
+    const decryptButton = document.getElementById("decryptButton");
+    const inputText = document.getElementById("inputText");
+    const outputText = document.getElementById("outputText");
+
+    encryptButton.addEventListener("click", () => {
+      const text = inputText.value.toUpperCase();
+      let morseText = "";
+
+      for (let char of text) {
+        if (char === " ") {
+          morseText += " / ";
+        } else if (morseCodeMap[char]) {
+          morseText += morseCodeMap[char] + " ";
+        }
+      }
+
+      outputText.textContent = morseText;
+    });
+
+    decryptButton.addEventListener("click", () => {
+      const morseText = inputText.value;
+      let plainText = "";
+
+      const morseWords = morseText.split(" / ");
+      for (let morseWord of morseWords) {
+        const morseChars = morseWord.split(" ");
+        for (let morseChar of morseChars) {
+          if (reverseMorseCodeMap[morseChar]) {
+            plainText += reverseMorseCodeMap[morseChar];
+          } else if (morseChar === "") {
+            plainText += " ";
+          }
+        }
+        plainText += " ";
+      }
+
+      outputText.textContent = plainText;
+    });
+  </script>
+</body>
+</html>
